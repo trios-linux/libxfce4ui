@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,--as-needed -Wl,-O1 -Wl,-z,defs
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+XFVENDOR=TRIOS
+ifeq ($(shell dpkg-vendor --is Ubuntu && echo yes),yes)
+	XFVENDOR=Xubuntu
+endif
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_configure:
+	NOCONFIGURE=xdt-autogen
+	dh_auto_configure -- --with-vendor-info=$(XFVENDOR) --disable-silent-rules \
+	--disable-gladeui \
+	--enable-gtk-doc
+
+override_dh_install:
+ifeq ($(XFVENDOR),TRIOS)
+	dh_install --sourcedir=$(CURDIR) -plibxfce4ui-utils debian/vendorinfo usr/share/xfce4
+endif
+	dh_install --fail-missing -X .la
+
+override_dh_strip:
+	dh_strip -plibxfce4ui-1-0 --dbg-package=libxfce4ui-1-dbg
+	dh_strip -plibxfce4ui-2-0 --dbg-package=libxfce4ui-2-dbg
+	dh_strip -plibxfce4ui-utils --dbg-package=libxfce4ui-utils-dbg
+
+override_dh_makeshlibs:
+	dh_makeshlibs -plibxfce4ui-1-0 -Xlibxfce4kbd-private
+	dh_makeshlibs -plibxfce4ui-2-0 -Xlibxfce4kbd-private

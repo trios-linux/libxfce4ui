@@ -1,0 +1,164 @@
+libxfce4ui (4.12.0-trios2) mia; urgency=medium
+
+  * Merge with experimental.
+  * Build with gtk3
+
+ -- Filip Danilovic <filip@openmailbox.org>  Sat, 21 Mar 2015 15:56:56 +0100
+
+libxfce4ui (4.12.0-trios1) mia; urgency=medium
+
+  * New upstream release.
+  * First TRIOS build. GTK2 only, for now.
+  * debian/patches - Added upstream, dropping:
+    - 01_replace-ctrl-primary-gtk-shortcuts.patch
+    - 02_Fix-keyboard-shortcuts-with-Shift-modifier-bug-8744.patch
+
+ -- Filip Danilovic <filip@openmailbox.org>  Sun, 01 Mar 2015 19:56:56 +0100
+
+libxfce4ui (4.10.0-5) unstable; urgency=low
+
+  * debian/rules:
+    - force disable gladeui.                                    closes: #724037
+  * debian/patches:
+    - 02_Fix-keyboard-shortcuts-with-Shift-modifier-bug-8744 added, fix
+      keyboard shortcut not working when using shift modifier.  closes: #721669
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Wed, 09 Oct 2013 21:01:03 +0200
+
+libxfce4ui (4.10.0-4) unstable; urgency=low
+
+  [ Lionel Le Folgoc ]
+  * debian/xfhelp4: added, reintroduced until all plugins are migrated to the
+    new help system.
+  * debian/libxfce4ui-utils.install: install xfhelp4 to usr/bin.
+  * Only install the vendorinfo file on Debian, not Ubuntu.
+  * debian/rules: fix dh_strip override so that libxfce4ui-utils dbg symbols
+    end up in libxfce4ui-utils-dbg and not in libxfce4ui-1-dbg.
+  * debian/control: let libxfce4ui-utils-dbg breaks/replaces previous
+    libxfce4ui-1-dbg for the moved symbol.
+
+  [ Evgeni Golov ]
+  * Correct Vcs-* URLs to point to anonscm.debian.org
+
+  [ Jackson Doak ]
+  * debian/copyright: Convert to debian format 1.0
+  * debian/control: 
+    - Make VCS URLs point to trunk instead of experimental
+  * debian/rules: disable silent building
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Sat, 21 Sep 2013 17:48:36 +0200
+
+libxfce4ui (4.10.0-3) unstable; urgency=low
+
+  * debian/control:
+    - drop glade-xfce package, since it's now useless with the move to GTK3.
+                                                                closes: #709243
+    - update standards version to 3.9.4.
+  * debian/rules:
+    - drop glade file removal.
+    - use autotools-dev addons to refresh config.{sub,guess}. 
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Sun, 16 Jun 2013 16:05:12 +0200
+
+libxfce4ui (4.10.0-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * debian/rules:
+    - enable all hardening flags.
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Tue, 21 May 2013 21:32:57 +0200
+
+libxfce4ui (4.10.0-1) experimental; urgency=low
+
+  * New upstream stable release.
+  * debian/patches:
+    - 01_replace-ctrl-primary-gtk-shortcuts.patch: refreshed to apply cleanly.
+  * debian/control: revert to unversioned libxfce4util-dev, bump required
+    versions for Xfce 4.10.
+
+ -- Lionel Le Folgoc <mrpouit@gmail.com>  Fri, 04 May 2012 22:48:03 +0200
+
+libxfce4ui (4.9.2-1) experimental; urgency=low
+
+  * New upstream development release.
+  * debian/xfce4-about.1, debian/libxfce4ui-utils.manpages: ship a manpage
+    for xfce4-about.
+
+ -- Lionel Le Folgoc <mrpouit@gmail.com>  Sun, 15 Apr 2012 15:29:29 +0200
+
+libxfce4ui (4.9.1-1) experimental; urgency=low
+
+  [ Lionel Le Folgoc ]
+  * New upstream development release.
+  * debian/control:
+    - add a new binary package libxfce4ui-utils to contain xfce4-about files
+    - libxfce4ui-utils breaks/replaces pre 4.10 xfce4-utils package, as it
+      previously shipped xfce4-about.
+    - use Breaks instead of Conflicts when possible.
+  * debian/patches:
+    - 01_replace-ctrl-primary-gtk-shortcuts.patch: refreshed to apply cleanly
+      and add DEP-3 headers.
+  * debian/libxfce4ui-1-0.shlibs: added.
+  * debian/rules: take vendor handling code from xfce4-utils for xfce4-about.
+  * debian/vendorinfo: added, taken from xfce4-utils, and renamed from
+    debian/Debian.
+
+  [ Yves-Alexis Perez ]
+  * debian/control:
+    - update standards version to 3.9.3.
+    - update debhelper build-dep to 9.
+    - add build-dep on dpkg-dev 1.16.1.
+    - drop hardening-includes build-dep.
+    - add pre-depends on ${misc:Pre-Depends}.
+    - build-dep on libxfce4util6-dev to start using the new API and make the
+      -dev package depends on it.
+  * debian/rules:
+    - use hardening support in debhelper 9 and dpkg-dev 1.16.1
+    - multi-archify the paths. 
+    - build with --parallel.
+  * debian/*.install:
+    - multi-archify the paths. 
+
+ -- Lionel Le Folgoc <mrpouit@gmail.com>  Sun, 08 Apr 2012 16:03:09 +0200
+
+libxfce4ui (4.8.1-1) unstable; urgency=low
+
+  * New upstream bugfix release, including:
+    - updated dutch translation.                                    lp: #781043
+  * debian/copyright: fix EOLs.
+
+ -- Lionel Le Folgoc <mrpouit@gmail.com>  Wed, 28 Dec 2011 21:20:37 +0100
+
+libxfce4ui (4.8.0-4) unstable; urgency=low
+
+  * debian/control:
+    - fix glade-xfce Recommends on libxfce4ui-1-dev.
+  * debian/patches:
+    - 01_replace-ctrl-primary-gtk-shortcuts added, replace Control by Primary
+      in keyboard shortcuts since Gtk+ switch broke current shortcuts.
+  * debian/NEWS added to tell people how to rebind shortcuts broken by the
+    Gtk+ upgrade.
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Tue, 20 Dec 2011 15:39:18 +0100
+
+libxfce4ui (4.8.0-3) unstable; urgency=low
+
+  * debian/rules:
+    - cleanup .la files for glade too.                          closes: #633239
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Sat, 09 Jul 2011 15:34:01 +0200
+
+libxfce4ui (4.8.0-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * debian/control:
+    - drop Emanuele, Simon and Mike from uploaders.
+    - update standards version to 3.9.2.
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Tue, 19 Apr 2011 15:56:59 +0200
+
+libxfce4ui (4.8.0-1) experimental; urgency=low
+
+  * Initial release.                                            closes: #612048
+
+ -- Yves-Alexis Perez <corsac@debian.org>  Sun, 06 Feb 2011 16:53:52 +0100
