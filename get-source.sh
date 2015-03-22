@@ -29,7 +29,7 @@ fi
 
 if [ ! -f $PKG ]; 
 then
-	wget http://archive.xfce.org/xfce/4.12/src/$PKG
+	wget http://archive.xfce.org/src/xfce/$NAME/4.12/$PKG
 else
 	echo "$PKG exists, skipping download"
 fi
